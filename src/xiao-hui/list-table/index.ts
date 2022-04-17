@@ -1,7 +1,7 @@
 /**
  * 单向链表
  */
-
+export { ListTable };
 class PNode {
   public data: any;
   public next: PNode | null;
