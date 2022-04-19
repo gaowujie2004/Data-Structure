@@ -18,18 +18,61 @@ function firstTraverseRoot(node: PNode) {
 }
 
 function firstWhileRoot(node: PNode) {
-  // 循环的方式「先序」遍历。
-  const treeStack: PNode[] = [];
-  let p: PNode = node;
+  const stack = [] as PNode[];
+  let treeNode = node;
 
-  treeStack.push(p);
-  while (treeStack.length !== 0) {
-    const tempNode = treeStack.pop();
+  while (treeNode !== null || stack.length !== 0) {
+    // 迭代访问左子节点，并入栈
+    while (treeNode !== null) {
+      console.log(treeNode.data);
+      stack.push(treeNode);
+      treeNode = treeNode.left;
+    }
 
-    if (tempNode !== null) {
-      console.log('--访问节点：', tempNode.data);
-      treeStack.push(tempNode.right);
-      treeStack.push(tempNode.left);
+    // 走到这里 说明 栈顶 treeNode.left -> null
+    // 若没有左子节点，则弹出栈顶节点，访问右子节点
+    if (stack.length !== 0) {
+      treeNode = stack.pop();
+      treeNode = treeNode.right;
     }
   }
 }
+
+// 后序遍历 - 循环方式
+function houWhileRoot(node: PNode) {
+  const stack = [] as PNode[];
+  let currentNode = node;
+  let lastNode: PNode = null;
+
+  while (currentNode !== null || stack.length !== 0) {
+    while (currentNode !== null) {
+      // 一直遍历 左子节点，直到没有为止，那么栈顶就是，最后的左叶子节点
+      stack.push(currentNode);
+      currentNode = currentNode.left;
+    }
+    // 此时栈顶就是，最后的左叶子节点
+
+    /**
+     * 程序流程到这里有两种可能：
+     * 1、左子树遍历完了
+     * 2、回溯，因为左节点遍历过了，该轮到右节点了。（重）
+     */
+    currentNode = stack[stack.length - 1];
+    if (currentNode.right === null || currentNode.right === lastNode) {
+      // 栈顶节点 左、右节点都空
+      // 或者栈顶节点 左遍历过了，右也遍历过了
+      console.log(currentNode.data);
+      lastNode = currentNode;
+      currentNode = null;
+      stack.pop();
+    } else {
+      // current.right
+      currentNode = currentNode.right;
+      // 继续重复
+    }
+  }
+}
+
+houWhileRoot(A);
+
+// firstTraverseRoot(A);

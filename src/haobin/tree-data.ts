@@ -33,5 +33,13 @@ C.left = F;
 
 F.left = G;
 
+/**================================== 数字树 **/
+const A1 = createNode('1');
+const A2 = createNode('2');
+const A3 = createNode('3');
+const A4 = createNode('4');
+const A5 = createNode('5');
+const A6 = createNode('6');
+
 // A 树的根节点
-export { A };
+export { A, A1 };
