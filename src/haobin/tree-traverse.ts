@@ -73,6 +73,26 @@ function houWhileRoot(node: PNode) {
   }
 }
 
-houWhileRoot(A);
+// houWhileRoot(A);
 
 // firstTraverseRoot(A);
+
+// 层序遍历 —— 非递归
+function cengTranerse(currentNode: PNode) {
+  // 遍历当前节点，将当前节点 左、右子节点放到队列中
+  let queue: PNode[] = [];
+  queue.push(currentNode);
+
+  while (queue.length !== 0) {
+    // 先遍历当前节点，然后再孩子
+    const node = queue.shift();
+    console.log('层序遍历非递归，节点：', node.data);
+
+    if (node.left !== null) {
+      queue.push(node.left);
+    }
+    if (node.right !== null) {
+      queue.push(node.right);
+    }
+  }
+}
