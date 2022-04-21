@@ -6,7 +6,7 @@
 
 import { createElement } from '../index';
 import type { Element } from '../index';
-export { QueueArray, QueueListTable };
+export { QueueListTable, QueueCircle };
 
 /**================================== 链式存储 **/
 class QueueListTable<T> {
@@ -50,11 +50,45 @@ class QueueListTable<T> {
   }
 }
 
-/**================================== 顺序存储 **/
-class QueueArray<T> {
-  constructor() {}
-}
-
 /**================================== 循环队列（顺序存储） **/
-// 针对顺序存储时，出队元素位置复用。
-class QueueCircle<T> {}
+// 针对顺序存储时，出队一个元素，为了不整体移动
+// 为了避免当只有一个元素时，队头和队尾重合使处理变得麻烦，所以引入两个指
+// 针，front指针指向队头元素，rear指针指向队尾元素的下一个位置，这样当front等
+// 于rear时，此队列不是还剩一个元素，而是空队列。
+// 这样会有一个空位
+class QueueCircle<T> {
+  public front: number;
+  public rear: number;
+  public size: number; // 元素个数，并不是数组长度
+  private array: Array<T>;
+  private maxLength: number;
+
+  constructor(maxLength: number) {
+    this.size = 0;
+    this.front = this.rear = 0;
+    this.array = new Array<T>(maxLength);
+    this.maxLength = maxLength;
+  }
+
+  enQueue(data: T) {
+    // 判断满
+    if ((this.rear + 1) % this.maxLength === this.front) {
+      throw new Error('满了');
+    }
+    this.array[this.rear] = data;
+    this.rear = (this.rear + 1) % this.maxLength;
+    this.size++;
+  }
+
+  deQueue() {
+    if (this.front === this.rear) {
+      throw new Error('队列为空');
+    }
+    const deQueueElement = this.array[this.front];
+    this.array[this.front] = null;
+    this.front = (this.front + 1) % this.maxLength;
+    this.size--;
+
+    return deQueueElement;
+  }
+}

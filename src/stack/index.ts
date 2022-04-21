@@ -4,7 +4,6 @@
  */
 export {};
 
-// 数组实现的，循环队列
 class CycleQueue<T> {
   private array: T[];
   private front: number; // 队头
