@@ -11,7 +11,7 @@ class QueueListTable<T> {
 
   constructor() {
     this.size = 0;
-    // 头节点为了方便操作， this.head.next 才是第一个有效节点(队头节点)
+    // 头节点，为了方便操作， this.head.next 才是第一个有效节点(队头节点)
     this.front = this.rear = {
       data: null,
       next: null,
