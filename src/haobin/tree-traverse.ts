@@ -96,3 +96,27 @@ function cengTranerse(currentNode: PNode) {
     }
   }
 }
+
+// 层序遍历 —— 递归
+(() => {
+  const queue: PNode[] = [];
+  queue.push(A);
+
+  function cengTranerse2() {
+    const currentNode = queue.shift();
+    console.log('层序遍历，递归：', currentNode.data);
+
+    if (currentNode.left !== null) {
+      queue.push(currentNode.left);
+    }
+    if (currentNode.right !== null) {
+      queue.push(currentNode.right);
+    }
+
+    if (queue.length !== 0) {
+      cengTranerse2();
+    }
+  }
+
+  cengTranerse2();
+})();
