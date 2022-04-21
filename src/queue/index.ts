@@ -1,12 +1,17 @@
-import { type PNode, Node } from '../../index';
-
 /**
- * @title 队列 —— 线性逻辑结构
- * 链式存储方式，正常的链表做一些限制
+ * 队列 —— 线性逻辑结构，是一种受限制的「线性表」
+ * 其存储方式有两种：1）顺序存储；2）链式存储
+ * 线性表：是线性结构的统称，指的是数据和数据的逻辑关系，并不是数据和数据的物理关系
  */
+
+import { createElement } from '../index';
+import type { Element } from '../index';
+export { QueueArray, QueueListTable };
+
+/**================================== 链式存储 **/
 class QueueListTable<T> {
-  public front: PNode<T>; // 队头节点
-  public rear: PNode<T>; // 队尾节点
+  public front: Element<T>; // 队头节点
+  public rear: Element<T>; // 队尾节点
   public size: number; // 节点个数
 
   constructor() {
@@ -19,7 +24,7 @@ class QueueListTable<T> {
   }
 
   enQueue(data: T) {
-    const newNode = new Node(data);
+    const newNode = createElement(data);
     this.rear.next = newNode;
     this.rear = newNode;
     this.size++;
@@ -45,9 +50,11 @@ class QueueListTable<T> {
   }
 }
 
-/**================================== TEST **/
-const queue = new QueueListTable<number>();
-queue.enQueue(111);
-queue.enQueue(222);
-queue.enQueue(333);
-queue.enQueue(444);
+/**================================== 顺序存储 **/
+class QueueArray<T> {
+  constructor() {}
+}
+
+/**================================== 循环队列（顺序存储） **/
+// 针对顺序存储时，出队元素位置复用。
+class QueueCircle<T> {}

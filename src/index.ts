@@ -1,18 +1,13 @@
-// import './xiao-hui/array/index';
-
 import './xiao-hui/list-table';
 
-export interface PNode<T> {
+export interface Element<T> {
   data: T;
-  next: PNode<T>;
+  next: Element<T>;
 }
 
-export class Node<T> {
-  public data: T;
-  public next: PNode<T>;
-
-  constructor(data: T) {
-    this.data = data;
-    this.next = null;
-  }
+export function createElement<T>(data: T) {
+  return {
+    data,
+    next: null,
+  } as Element<T>;
 }
