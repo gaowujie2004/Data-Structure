@@ -1,5 +1,9 @@
 import { createElement } from '../index';
 import type { Element } from '../index';
+enum StackId {
+  One = 1,
+  Two = 2,
+}
 
 /**
  * 大话数据结构 —— 栈（逻辑结构）
@@ -44,6 +48,7 @@ class SharedStack<T> {
   private array: Array<T>;
   private maxLength: number;
 
+  static StackNumber = StackId;
   constructor(maxLength: number) {
     this.array = new Array<T>(maxLength);
     this.maxLength = maxLength;
@@ -51,20 +56,42 @@ class SharedStack<T> {
     this.top1 = -1;
     this.top2 = maxLength;
   }
-  push(data: T) {
+  push(data: T, stackId: StackId) {
     if (this.top1 + 1 === this.top2) {
       throw new Error('满了');
     }
-  }
-
-  pop() {
-    if (this.top === -1) {
-      throw new Error('空栈');
+    // 两栈，压栈向中间靠拢
+    if (stackId === StackId.One) {
+      this.array[++this.top1] = data;
+    }
+    if (stackId === StackId.Two) {
+      this.array[--this.top2] = data;
     }
 
-    const resData = this.array[this.top];
-    this.array[this.top] = null;
-    this.top--;
+    this.size++;
+  }
+
+  pop(stackId: StackId) {
+    let resData: T;
+    if (stackId === StackId.One) {
+      if (this.top1 === -1) {
+        return null;
+      }
+
+      resData = this.array[this.top1];
+      this.array[this.top1] = null;
+      this.top1--;
+    } else if (stackId === StackId.Two) {
+      if (this.top2 === this.maxLength) {
+        return null;
+      }
+
+      resData = this.array[this.top2];
+      this.array[this.top2] = null;
+      this.top2++;
+    } else {
+      throw new Error('stackId param is required');
+    }
 
     return resData;
   }
@@ -74,14 +101,14 @@ class SharedStack<T> {
  * 链式存储
  */
 class ListStack<T> {
-  public top: PNode<T>; // 链表的 第一个节点
+  public top: Element<T>; // 链表的 第一个节点
   public size: number;
   constructor() {
     this.top = null;
     this.size = 0;
   }
 
-  push(el: PNode<T>) {
+  push(el: Element<T>) {
     el.next = this.top;
     this.top = el;
     this.size++;
