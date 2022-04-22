@@ -1,14 +1,14 @@
 import { createElement } from '../index';
 import type { Element } from '../index';
+
 enum StackId {
   One = 1,
   Two = 2,
 }
 
-/**
- * 大话数据结构 —— 栈（逻辑结构）
- * 顺序存储实现
- */
+export { ArrayStack, SharedStack, ListStack };
+
+/**================================== 顺序存储：最原始的 **/
 class ArrayStack<T> {
   private maxLength: number;
   private array: Array<T>;
