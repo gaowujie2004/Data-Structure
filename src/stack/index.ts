@@ -97,23 +97,22 @@ class SharedStack<T> {
   }
 }
 
-/**
- * 链式存储
- */
+/**================================== 链式存储 **/
 class ListStack<T> {
-  public top: Element<T>; // 链表的 第一个节点
+  public top: Element<T>; // 栈顶元素
   public size: number;
   constructor() {
     this.top = null;
     this.size = 0;
   }
 
-  push(el: Element<T>) {
-    el.next = this.top;
-    this.top = el;
+  push(data: T) {
+    const element = createElement(data);
+    element.next = this.top;
+    this.top = element;
     this.size++;
 
-    return el;
+    return element;
   }
 
   pop() {
@@ -124,6 +123,6 @@ class ListStack<T> {
     this.top = popElement.next;
     this.size--;
 
-    return popElement;
+    return popElement.data;
   }
 }
