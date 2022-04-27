@@ -25,22 +25,6 @@ export class ListTable {
     };
   }
 
-  getPrev(index: number) {
-    if (index < 0 || index > this.size) {
-      throw new Error('超范围');
-    }
-
-    if (index === this.size) {
-      return this.Rear;
-    }
-
-    let p = this.Head;
-    for (let i = 0; i < index; i++) {
-      p = p.next;
-    }
-    return p;
-  }
-
   insert(index: number, data: any) {
     if (index < 0 || index > this.size) {
       throw new Error('超出链表范围');
@@ -101,20 +85,52 @@ export class ListTable {
     //   tempNode = tempNode.next;
     // }
 
-    let tempNode = this.Head;
+    let tempNode = this.Head.next;
     while (tempNode !== null) {
       console.log('--节点：', tempNode.data);
       tempNode = tempNode.next;
     }
   }
+
+  get(index: number) {
+    if (index < 0 || index >= this.size) {
+      throw new Error('超范围');
+    }
+
+    if (index === this.size - 1) {
+      return this.Rear;
+    }
+
+    let p = this.Head.next;
+    for (let i = 0; i < index; i++) {
+      p = p.next;
+    }
+    return p;
+  }
+
+  private getPrev(index: number) {
+    if (index < 0 || index > this.size) {
+      throw new Error('超范围');
+    }
+
+    if (index === this.size) {
+      return this.Rear;
+    }
+
+    let p = this.Head;
+    for (let i = 0; i < index; i++) {
+      p = p.next;
+    }
+    return p;
+  }
 }
 
-const myListTable = new ListTable();
-myListTable.insert(0, 'A');
-myListTable.insert(1, 'B');
-myListTable.insert(2, 'C');
-myListTable.insert(3, 'D');
-myListTable.insert(4, 'E');
-myListTable.insert(3, 'DD');
+// const myListTable = new ListTable();
+// myListTable.insert(0, 'A');
+// myListTable.insert(1, 'B');
+// myListTable.insert(2, 'C');
+// myListTable.insert(3, 'D');
+// myListTable.insert(4, 'E');
+// myListTable.insert(3, 'DD');
 
-myListTable.traverse();
+// myListTable.traverse();
