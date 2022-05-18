@@ -1,6 +1,8 @@
 import { A } from './tree-data';
 import type { PNode } from './tree-data';
 
+/**================================== 先序 - 递归实现 **/
+
 function firstTraverseRoot(node: PNode) {
   // 1. 先遍历根节点
   // 2. 再先序遍历 左子树
@@ -17,6 +19,7 @@ function firstTraverseRoot(node: PNode) {
   }
 }
 
+/**================================== 先序 - 循环实现 **/
 function firstWhileRoot(node: PNode) {
   const stack = [] as PNode[];
   let treeNode = node;
@@ -38,7 +41,7 @@ function firstWhileRoot(node: PNode) {
   }
 }
 
-// 后序遍历 - 循环方式
+/**================================== 后序 - 循环实现 **/
 function houWhileRoot(node: PNode) {
   const stack = [] as PNode[];
   let currentNode = node;
@@ -72,10 +75,6 @@ function houWhileRoot(node: PNode) {
     }
   }
 }
-
-// houWhileRoot(A);
-
-// firstTraverseRoot(A);
 
 // 层序遍历 —— 非递归
 function cengTranerse(currentNode: PNode) {
