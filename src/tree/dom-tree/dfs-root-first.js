@@ -58,49 +58,34 @@ const node = {
   ],
 };
 
+const { body } = require('./data');
+
 /**================================== 递归 实现 **/
 function dfsRecursion(root) {
   if (!root) {
     return;
   }
-  // todo：遍历先输出根
+
   console.log(root.id);
 
   // 非叶子节点， 单节点, 或者空
-  const children = Array.isArray(root.children) ? root.children : [root.children];
-  children.forEach(dfsRecursion);
+  root.childNodes?.forEach(function forEachChildren(child) {
+    dfsRecursion(child);
+  });
 }
 dfsRecursion(node);
 
-/**================================== 循环 实现 **/
-function dfsWhile(root) {
-  if (!root) {
+/**================================== 递归 实现2 **/
+function dfsRecursion2(node) {
+  if (!node) {
     return;
   }
+  console.log(node);
 
-  const stack = [root];
-  const visitedNodes = [];
-  let currentNode;
-  while (stack.length) {
-    currentNode = stack.pop();
-
-    if (!currentNode) {
-      continue;
-    }
-    if (visitedNodes.includes(currentNode)) {
-      continue;
-    }
-
-    // todo: 先序遍历
-    console.log(currentNode.id);
-
-    if (!currentNode.children) {
-      continue;
-    }
-
-    Array.isArray(currentNode.children) ? currentNode.children.forEach((child) => stack.push(child)) : stack.push(currentNode.children);
+  let child = node.firstElementChild;
+  for (let i = 0; i < node.childElementCount; i++) {
+    dfsRecursion2(child);
+    child = child.nextElementSibling;
   }
 }
-
-console.log('\n\n\n');
-dfsWhile(node);
+// dfsRecursion2(body)
