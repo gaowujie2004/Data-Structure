@@ -1,3 +1,5 @@
+const { data: head } = require('./test/mock-data');
+
 function reorderList(head, tail) {
   // 如果tail为null，说明已经递归到链表尾部，这时候需要重新连接尾部节点与头部节点，故返回head
   if (tail == null) {
@@ -33,32 +35,9 @@ function reorderList(head, tail) {
   return tail.next;
 }
 
-const head = {
-  val: 1,
-  next: null,
-};
-const node2 = {
-  val: 2,
-  next: null,
-};
-const node3 = {
-  val: 3,
-  next: null,
-};
-const node4 = {
-  val: 4,
-  next: null,
-};
-const node5 = {
-  val: 5,
-  next: null,
-};
-
-head.next = node2;
-node2.next = node3;
-node3.next = node4;
-node4.next = node5;
-
 // 没有返回值，递归内部处理
 reorderList(head, head);
-head;
+
+module.exports = {
+  reorderList,
+};
