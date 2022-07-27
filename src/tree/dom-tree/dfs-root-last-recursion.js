@@ -60,7 +60,7 @@ const node = {
 
 /**================================== 递归 实现 **/
 function dfsRecursion(root) {
-  if (!root) {
+  if (!root.children) {
     return;
   }
 
@@ -68,6 +68,6 @@ function dfsRecursion(root) {
   const children = Array.isArray(root.children) ? root.children : [root.children];
   children.forEach(dfsRecursion);
 
-  console.log(root.id);
+  console.log('-----', root.id, root.children);
 }
 dfsRecursion(node);
