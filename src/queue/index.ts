@@ -10,14 +10,14 @@ export { QueueListTable, QueueCircle };
 
 /**================================== 链式存储 **/
 class QueueListTable<T> {
-  public front: Element<T>; // 队头节点
+  public dummyHead: Element<T>; // 虚拟头节点，dummyHead.next 才是真正的队头节点
   public tail: Element<T>; // 队尾节点
   public size: number; // 节点个数
 
   constructor() {
     this.size = 0;
-    // 虚拟头节点：为了方便操作。this.head.next 才是第一个有效节点(队头节点)
-    this.front = this.tail = createElement(null);
+    // 虚拟头节点：为了方便操作。this.dummyHead.next 才是第一个有效节点(队头节点)
+    this.dummyHead = this.tail = createElement(null);
   }
 
   enQueue(data: T) {
@@ -30,19 +30,19 @@ class QueueListTable<T> {
   }
 
   deQueue() {
-    if (this.front === this.tail) {
+    if (this.dummyHead === this.tail) {
       // 空队列
       return null;
     }
 
-    const firstNode = this.front.next; // 队头节点
-    this.front.next = firstNode.next;
+    const firstNode = this.dummyHead.next; // 队头节点
+    this.dummyHead.next = firstNode.next;
 
     if (this.tail === firstNode) {
       // todo
       // 队列中，只有一个节点，此时队头和队尾相同。
       // 要额外处理一下。
-      this.tail = this.front; // 把最后一个删除了，那就成空队列了。
+      this.tail = this.dummyHead; // 把最后一个删除了，那就成空队列了。
     }
     this.size--;
 
