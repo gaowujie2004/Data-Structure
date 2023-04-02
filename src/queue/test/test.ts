@@ -1,4 +1,4 @@
-import { QueueListTable } from './index';
+import { QueueListTable } from '../index';
 
 /**================================== TEST **/
 const queue = new QueueListTable<number>();
