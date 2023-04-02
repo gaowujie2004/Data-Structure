@@ -8,7 +8,7 @@ enum StackId {
 
 export { ArrayStack, SharedStack, ListStack };
 
-/**================================== 顺序存储：最原始的 **/
+/**================================== 顺序存储：数组实现**/
 class ArrayStack<T> {
   private maxLength: number;
   private array: Array<T>;
