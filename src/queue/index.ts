@@ -92,3 +92,90 @@ class QueueCircle<T> {
     return deQueueElement;
   }
 }
+
+class ListTableQueue<T> {
+  protected size: number;
+  protected dummyHead: Element<T>;
+  protected tail: Element<T>;
+
+  constructor() {
+    this.size = 0;
+    this.dummyHead = this.tail = createElement(null); // 虚拟头节点，并不是真正的队头节点，this.dummyHead.next 才是
+  }
+
+  public enQueue(data: T): T {
+    const enQueueEl = createElement(data);
+    this.tail.next = enQueueEl; // 让上一步（旧的）tail.next -> 入队元素
+    this.tail = enQueueEl; // 更新尾指针
+    this.size++;
+
+    return data;
+  }
+
+  public deQueue(): T | null {
+    if (this.dummyHead === this.tail) {
+      // 空队列
+      return null;
+    }
+
+    // this.dummyHead.next === null
+    // this.size 都可以判断空队列
+
+    const firstNode = this.dummyHead.next;
+    this.dummyHead.next = firstNode.next;
+    this.size--;
+
+    // TODO： 重要的，如果只有一个元素。 因为 this.dummyHead.next 和 this.tail 指针可能相同。即只有一个元素，this.dummyHead.next  不指向最后一个节点，但 this.tail 指向
+    if (firstNode === this.tail) {
+      this.tail = this.dummyHead;
+    }
+    return firstNode.data;
+  }
+}
+
+class QueueCircle2<T> {
+  private front: number;
+  private tail: number;
+  private array: Array<T>;
+  private size: number;
+  private maxLength: number;
+
+  constructor(maxLength: number) {
+    this.front = this.tail = 0; // 空队列标志
+    this.array = new Array(maxLength);
+    this.size = 0;
+    this.maxLength = maxLength;
+  }
+
+  push(data: T) {
+    // this.tail 是当前未元素的下一个位置
+    if (this.tail === this.front) {
+      // 不预留一个位置
+      return null;
+    }
+
+    // 因为 this.tail 初始是从0开始的
+    this.array[this.tail] = data;
+    this.tail = (this.tail + 1) % this.maxLength;
+    this.size++;
+
+    return data;
+  }
+
+  pop() {
+    if (this.size === 0) {
+      return null;
+    }
+
+    const frontElement = this.array[this.front];
+    this.array[this.front] = null;
+    this.front = (this.front + 1) % this.maxLength;
+    this.size--;
+
+    return frontElement;
+  }
+
+  getSize() {
+    return this.size;
+  }
+}
