@@ -33,6 +33,24 @@ C.left = F;
 
 F.left = G;
 
+/**
+     A
+   /   \
+  B     C
+ / \   /
+D   E F
+     /
+    G
+*/
+
+/**
+            A
+          /   \
+         B     C
+        / \   / \
+       D   E F   G
+ */
+
 /**================================== 数字树 **/
 const A1 = createNode('1');
 const A2 = createNode('2');
@@ -42,4 +60,4 @@ const A5 = createNode('5');
 const A6 = createNode('6');
 
 // A 树的根节点
-export { A, A1 };
+export { A as TREE_A, A1 as TREE_A1 };

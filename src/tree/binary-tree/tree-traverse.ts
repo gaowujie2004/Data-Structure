@@ -1,4 +1,4 @@
-import { A } from './tree-data';
+import { TREE_A } from './tree-data';
 import type { PNode } from './tree-data';
 
 /**================================== 先序 - 递归实现 **/
@@ -99,7 +99,7 @@ function cengTranerse(currentNode: PNode) {
 // 层序遍历 —— 递归
 (() => {
   const queue: PNode[] = [];
-  queue.push(A);
+  queue.push(TREE_A);
 
   function cengTranerse2() {
     const currentNode = queue.shift();
