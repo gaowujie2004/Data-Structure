@@ -1,5 +1,3 @@
-import './xiao-hui/list-table';
-
 export interface Element<T> {
   data: T;
   next: Element<T>;
