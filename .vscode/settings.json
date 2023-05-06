@@ -1,4 +1,12 @@
 {
   "editor.fontSize": 13,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "node_modules": true,
+    ".vscode": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json,.gitignore, .npmrc, nodemon.json, jest.config.js"
+  }
 }
