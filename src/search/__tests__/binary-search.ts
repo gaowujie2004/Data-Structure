@@ -1,5 +1,4 @@
 import binarySearch from '../binary-search';
-
 import { test, expect, describe, beforeEach } from '@jest/globals';
 
 describe('二分查找', () => {
