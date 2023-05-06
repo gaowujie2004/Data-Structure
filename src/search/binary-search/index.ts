@@ -18,7 +18,6 @@ function binarySearch<T>(array: T[], target: T) {
     // mid = low + ~~((height-low) / 2)
     // 其中low+height 肯定不会溢出。 low+height可能会溢出
 
-    //
     if (target < array[mid]) {
       height = mid - 1; // 细节3. mid已经判断过了，不能再包含mid
     } else if (target > array[mid]) {
@@ -30,3 +29,5 @@ function binarySearch<T>(array: T[], target: T) {
 
   return -1; // 没有找到
 }
+
+export default binarySearch;
