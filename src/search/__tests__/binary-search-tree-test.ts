@@ -151,3 +151,31 @@ describe('二叉搜索树查找', () => {
     expect(bst.find(0)).toBe(true);
   });
 });
+
+describe('二次搜索树-minValue', () => {
+  let bst: BinarySearchTree<number>;
+
+  beforeEach(() => {
+    bst = new BinarySearchTree();
+  });
+
+  test('有序排列', () => {
+    bst.insert(1);
+    bst.insert(2);
+    bst.insert(3);
+    bst.insert(4);
+    expect(bst.minNode().data).toBe(1);
+    bst.insert(5);
+    expect(bst.minNode().data).toBe(1);
+
+    bst = new BinarySearchTree<number>();
+    bst.insert(5);
+    bst.insert(4);
+    bst.insert(3);
+    bst.insert(2);
+    bst.insert(1);
+    expect(bst.maxNode().data).toBe(5);
+    bst.insert(0);
+    expect(bst.maxNode().data).toBe(5);
+  });
+});

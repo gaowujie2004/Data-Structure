@@ -24,6 +24,31 @@ class BinarySearchTree<T> {
 
     return false;
   }
+  minNode() {
+    if (null === this.head) {
+      return null;
+    }
+
+    let cur = this.head;
+    while (cur && cur.left) {
+      cur = cur.left;
+    }
+
+    return cur;
+  }
+
+  maxNode() {
+    if (null === this.head) {
+      return null;
+    }
+
+    let cur = this.head;
+    while (cur && cur.right) {
+      cur = cur.right;
+    }
+
+    return cur;
+  }
 
   // 循环版
   insert(data: T) {
